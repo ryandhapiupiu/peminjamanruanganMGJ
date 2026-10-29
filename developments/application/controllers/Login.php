@@ -17,25 +17,39 @@ class Login extends CI_Controller
 
 	public function proses()
 	{
-		// Memeriksa data login apakah sesuai dengan database
 		$username	= $this->input->post('username');
 		$password	= $this->input->post('password');
-		
-		$simpan		= array(
-			'username'	=> $username,
-			'password'	=> md5($password)
-			);
+		$user = $this->model_login
+			->periksa_login('tb_user', array('username' => $username))
+			->row_array();
 
-		$periksa	= $this->model_login->periksa_login('tb_user', $simpan);
-		
-		// Menyimpan session login
-		if ($periksa->num_rows() > 0)
+		$password_valid = FALSE;
+		if (!empty($user))
 		{
-			$baris 	= $periksa->row_array();
+			if (password_verify($password, $user['password']))
+			{
+				$password_valid = TRUE;
+			}
+			elseif (strlen($user['password']) == 32 && ctype_xdigit($user['password']) && hash_equals($user['password'], md5($password)))
+			{
+				$password_valid = TRUE;
+			}
+		}
+
+		if ($password_valid)
+		{
+			if (!password_verify($password, $user['password']) || password_needs_rehash($user['password'], PASSWORD_DEFAULT))
+			{
+				$this->db->where('username', $username)->update('tb_user', array(
+					'password' => password_hash($password, PASSWORD_DEFAULT)
+				));
+			}
+
+			$this->session->sess_regenerate(TRUE);
 
 			$sesi	= array(
-				'namalengkap'  => $baris['fullname'],
-				'level'        => $baris['level'],
+				'namalengkap'  => $user['fullname'],
+				'level'        => $user['level'],
 				'status-masuk' => 'masuk'
 				);
 

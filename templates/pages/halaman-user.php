@@ -1,4 +1,4 @@
-<!-- Tabel Data User [Awal] -->
+﻿<!-- Tabel Data User [Awal] -->
 <table>
 	<tr>
 		<th>No.</th>
@@ -53,10 +53,8 @@
 					<li>
 						<div><i class="lnr lnr-layers"></i></div><select name="level" required="required">
 							<option value="" selected>Level</option>
-							<option value="Pengguna Ruangan">Pengguna Ruangan</option>
-							<option value="Bagian Umum">Bagian Umum</option>
-							<option value="Biro Pendidikan">Biro Pendidikan</option>
-							<option value="Kabag/Kaprodi">Kabag/Kaprodi</option>
+							<option value="Pengguna">Pengguna</option>
+							<option value="Admin">Admin</option>
 						</select>
 					</li>
 					<br /><hr />
@@ -102,11 +100,9 @@
 					</li>
 					<li>
 						<div><i class="lnr lnr-layers"></i></div><select name="level" required="required">
-							<option value="" selected>Level</option>
-							<option value="Pengguna Ruangan">Pengguna Ruangan</option>
-							<option value="Bagian Umum">Bagian Umum</option>
-							<option value="Biro Pendidikan">Biro Pendidikan</option>
-							<option value="Kabag/Kaprodi">Kabag/Kaprodi</option>
+							<option value="">Level</option>
+							<option value="Pengguna" <?php if($user['level'] == 'Pengguna') echo 'selected'; ?>>Pengguna</option>
+							<option value="Admin" <?php if($user['level'] == 'Admin') echo 'selected'; ?>>Admin</option>
 						</select>
 					</li>
 					<br /><hr />

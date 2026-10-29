@@ -2,8 +2,9 @@
 	<tr>
 		<th>No.</th>
 		<th>ID Ruangan</th>
-		<th>Nama Ruangan</th>
-		<th>Status Ruangan</th>
+		<th>Nama Ruang Meeting</th>
+		<th>Kapasitas</th>
+		<th>Status Ruang</th>
 		<th>Aksi</th>
 	</tr>
  	
@@ -12,6 +13,7 @@
 		<td align="center"><?php echo $no; ?></td>
 		<td align="center"><?php echo $baris['id_ruangan']; ?></td>
 		<td align="center"><?php echo $baris['nama_ruangan']; ?></td>
+		<td align="center"><?php echo isset($baris['kapasitas']) ? $baris['kapasitas'] . ' orang' : 'Belum diatur'; ?></td>
 		<td align="center"><?php echo $baris['status']; ?></td>
 		<td align="center">
 			<div class="button-edit">
@@ -32,7 +34,7 @@
 		<!-- Konten Modal [Awal] -->
 		<div class="modal-content">
 			<div class="modal-header">
-				Tambah Ruangan Baru
+				Tambah Ruang Meeting
 				<button type="button" class="close" data-dismiss="modal"><span class="lnr lnr-cross-circle"></span></button>
 			</div>
 
@@ -43,7 +45,10 @@
 						<div><i class="lnr lnr-user"></i></div><input type="text" name="id_ruangan" placeholder="ID ruangan" required />
 					</li>
 					<li>
-						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama ruangan" required />
+						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama ruang meeting" maxlength="50" required />
+					</li>
+					<li>
+						<div><i class="lnr lnr-users"></i></div><input type="number" name="kapasitas" placeholder="Kapasitas (orang)" min="1" required />
 					</li>
 					<br /><hr />
 					<li>
@@ -70,7 +75,7 @@
 		<!-- Konten Modal [Awal] -->
 		<div class="modal-content">
 			<div class="modal-header">
-				Sunting Data Ruangan
+				Sunting Data Ruang Meeting
 				<button type="button" class="close" data-dismiss="modal"><span class="lnr lnr-cross-circle"></span></button>
 			</div>
 
@@ -84,7 +89,10 @@
 						<div><i class="lnr lnr-user"></i></div><input type="text" placeholder="ID ruangan" value="<?php echo $baris['id_ruangan']; ?> (tidak dapat diubah)" disabled />
 					</li>
 					<li>
-						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama lengkap" value="<?php echo $baris['nama_ruangan']; ?>" required />
+						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama ruang meeting" maxlength="50" value="<?php echo $baris['nama_ruangan']; ?>" required />
+					</li>
+					<li>
+						<div><i class="lnr lnr-users"></i></div><input type="number" name="kapasitas" placeholder="Kapasitas (orang)" min="1" value="<?php echo isset($baris['kapasitas']) ? $baris['kapasitas'] : ''; ?>" required />
 					</li>
 					<br /><hr />
 					<li>

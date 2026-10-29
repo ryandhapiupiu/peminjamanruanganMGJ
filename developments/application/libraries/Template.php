@@ -12,6 +12,12 @@ class Template
     
   	function utama($content, $data = NULL)
   	{
+        if ($this->_ci->session->userdata('level') == 'Admin')
+        {
+            $this->_ci->load->model('model_peminjaman');
+            $data['jumlah_menunggu'] = $this->_ci->model_peminjaman->jumlah_menunggu();
+        }
+
         $data['menubar']  = $this->_ci->load->view('components/menubar', $data, TRUE);
         $data['dropdown'] = $this->_ci->load->view('components/dropdown', $data, TRUE);
         $data['content']  = $this->_ci->load->view($content, $data, TRUE);

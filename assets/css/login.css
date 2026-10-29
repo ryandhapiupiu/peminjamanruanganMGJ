@@ -164,8 +164,10 @@ body {
 }
 
 .login-form img {
-    width: 55px;
-    margin: 30px 0 10px 0;
+    max-width: 200px;
+    height: auto;
+    margin: 25px 0 15px 0;
+    object-fit: contain;
 }
 
 .login-form h3 {

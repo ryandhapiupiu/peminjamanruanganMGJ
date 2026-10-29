@@ -151,6 +151,140 @@ a:hover {
     border-bottom: 1px solid #f2f2f2;
 }
 
+.availability-filter {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.availability-filter label {
+    margin: 0 0 4px;
+}
+
+.availability-filter input,
+.availability-filter select {
+    min-height: 38px;
+    padding: 6px 10px;
+    border: 1px solid #d6dce1;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.availability-filter button {
+    min-height: 38px;
+    padding: 6px 16px;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    background: #008c78;
+}
+
+.availability-heading,
+.availability-legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 14px 20px 0;
+}
+
+.availability-heading strong {
+    color: #263238;
+    font-size: 16px;
+}
+
+.availability-legend {
+    gap: 16px;
+    padding-top: 10px;
+    font-size: 12px;
+}
+
+.availability-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 6px;
+    border-radius: 50%;
+}
+
+.availability-dot.available {
+    background: #16866f;
+}
+
+.availability-dot.booked {
+    background: #c53e45;
+}
+
+.availability-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    padding: 16px 20px 22px;
+}
+
+.availability-slot {
+    display: flex;
+    min-height: 88px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 12px;
+    border: 1px solid #16866f;
+    border-radius: 4px;
+    color: #176b5c;
+    background: #f0faf7;
+    text-decoration: none;
+}
+
+.availability-slot:hover,
+.availability-slot:focus {
+    color: #fff;
+    background: #16866f;
+    text-decoration: none;
+}
+
+.availability-slot strong {
+    font-size: 16px;
+}
+
+.availability-slot small {
+    margin-top: 2px;
+}
+
+.availability-slot.unavailable {
+    border-color: #d45a60;
+    color: #8d252b;
+    background: #fff0f0;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.availability-slot.unavailable small {
+    color: #a3343a;
+}
+
+@media (max-width: 600px) {
+    .availability-filter {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .availability-filter input,
+    .availability-filter select,
+    .availability-filter button {
+        width: 100%;
+    }
+
+    .availability-slots {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+}
+
 .dropdown-info {
     float: right;
     background-color: #eee;
