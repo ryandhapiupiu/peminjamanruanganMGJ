@@ -156,16 +156,17 @@ class Dashboard extends CI_Controller
 			redirect(base_url('dashboard/akun-pengguna'));
 		}
 		
-		// Validasi data peminjam (nama, departemen, nomor telepon)
-		if ($nama_peminjam === '' || $departemen_peminjam === '' || $telepon_peminjam === '')
+		if (empty($fullname) || empty($username) || empty($password))
 		{
-			echo 'Nama, departemen, dan nomor telepon peminjam wajib diisi.';
+			redirect(base_url('dashboard/akun-pengguna'));
 			return;
 		}
 
-		if (!preg_match('/^[0-9+\-\s]{8,20}$/', $telepon_peminjam))
+		// Cek duplikasi username
+		$cek = $this->model_user->lihat(array('username' => $username))->num_rows();
+		if ($cek > 0)
 		{
-			echo 'Format nomor telepon tidak valid.';
+			echo "<script>alert('Username ' . $username . ' sudah digunakan! Silakan gunakan username lain.'); window.location.href='" . base_url('dashboard/akun-pengguna') . "';</script>";
 			return;
 		}
 

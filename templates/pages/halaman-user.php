@@ -53,8 +53,9 @@
 					<li>
 						<div><i class="lnr lnr-layers"></i></div><select name="level" required="required">
 							<option value="" selected>Level</option>
-							<option value="Pengguna">Pengguna</option>
-							<option value="Admin">Admin</option>
+							<option value="Pengguna">Pengguna (Karyawan)</option>
+							<option value="Resepsionis">Resepsionis (Front Desk)</option>
+							<option value="Admin">Admin (GA / IT)</option>
 						</select>
 					</li>
 					<br /><hr />
@@ -101,8 +102,9 @@
 					<li>
 						<div><i class="lnr lnr-layers"></i></div><select name="level" required="required">
 							<option value="">Level</option>
-							<option value="Pengguna" <?php if($user['level'] == 'Pengguna') echo 'selected'; ?>>Pengguna</option>
-							<option value="Admin" <?php if($user['level'] == 'Admin') echo 'selected'; ?>>Admin</option>
+							<option value="Pengguna" <?php if($user['level'] == 'Pengguna') echo 'selected'; ?>>Pengguna (Karyawan)</option>
+							<option value="Resepsionis" <?php if($user['level'] == 'Resepsionis') echo 'selected'; ?>>Resepsionis (Front Desk)</option>
+							<option value="Admin" <?php if($user['level'] == 'Admin') echo 'selected'; ?>>Admin (GA / IT)</option>
 						</select>
 					</li>
 					<br /><hr />
