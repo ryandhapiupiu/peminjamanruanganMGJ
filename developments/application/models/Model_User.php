@@ -5,6 +5,11 @@ class Model_User extends CI_Model
 {
 	var $table = 'tb_user';
 
+	public function lihat($where)
+	{
+		return $this->db->get_where($this->table, $where);
+	}
+
 	public function tampil()
     {
         return $this->db->order_by('level', 'ASC')->get($this->table);

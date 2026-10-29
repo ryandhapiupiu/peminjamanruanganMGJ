@@ -147,15 +147,17 @@ class Dashboard extends CI_Controller
 		$this->wajib_admin();
 
 		// Menerima input, lalu disimpan pada variabel-variabel berikut
-		$fullname = $this->input->post('fullname');
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-		$level    = $this->input->post('level');
+		$fullname = trim($this->input->post('fullname') ?? '');
+		$username = trim($this->input->post('username') ?? '');
+		$password = $this->input->post('password') ?? '';
+		$level    = $this->input->post('level') ?? '';
+
 		if (!in_array($level, array('Admin', 'Resepsionis', 'Pengguna'), TRUE))
 		{
 			redirect(base_url('dashboard/akun-pengguna'));
+			return;
 		}
-		
+
 		if (empty($fullname) || empty($username) || empty($password))
 		{
 			redirect(base_url('dashboard/akun-pengguna'));
@@ -166,28 +168,29 @@ class Dashboard extends CI_Controller
 		$cek = $this->model_user->lihat(array('username' => $username))->num_rows();
 		if ($cek > 0)
 		{
-			echo "<script>alert('Username ' . $username . ' sudah digunakan! Silakan gunakan username lain.'); window.location.href='" . base_url('dashboard/akun-pengguna') . "';</script>";
+			echo "<script>alert('Username sudah digunakan! Silakan gunakan username lain.'); window.location.href='" . base_url('dashboard/akun-pengguna') . "';</script>";
 			return;
 		}
 
 		// Data yang akan disimpan/dibuat
-		$data     = array
-		(
+		$data = array(
 			'fullname' => $fullname,
 			'username' => $username,
 			'password' => password_hash($password, PASSWORD_DEFAULT),
 			'level'    => $level
 		);
 
-		$query    = $this->model_user->buat($data);
+		$query = $this->model_user->buat($data);
 
 		if ($query)
 		{
 			redirect(base_url('dashboard/akun-pengguna'));
+			return;
 		}
 		else
 		{
 			echo "Proses penambahan data gagal.";
+			return;
 		}
 	}
 
