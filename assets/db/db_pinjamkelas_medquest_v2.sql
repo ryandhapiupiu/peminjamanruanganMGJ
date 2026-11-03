@@ -77,7 +77,7 @@ CREATE TABLE `tb_ruangan` (
 
 LOCK TABLES `tb_ruangan` WRITE;
 /*!40000 ALTER TABLE `tb_ruangan` DISABLE KEYS */;
-INSERT INTO `tb_ruangan` VALUES ('R001','Pulau Jawa','Tersedia',5,'425df689b3da49a46d8cca03ea61d525'),('R002','Pulau Bali','Tersedia',6,'ac21c50087cad0659cb183baff9aa63e'),('R003','Pulau Papua','Tersedia',20,'e508f4e4b5ae301725c43aa005070b3b'),('R004','Pulau Sumatra','Tersedia',30,'df39d8e0a2144bc7c7b111093bac81fa'),('R005','Pulau Kalimantan','Tersedia',7,'d97cbc1e96b14db386d7d205b813a62f');
+INSERT INTO `tb_ruangan` VALUES ('R001','Pulau Jawa','Tersedia',5,'425df689b3da49a46d8cca03ea61d525'),('R002','Pulau Bali','Tersedia',6,'ac21c50087cad0659cb183baff9aa63e'),('R003','Pulau Papua','Tersedia',10,'e508f4e4b5ae301725c43aa005070b3b'),('R004','Pulau Sumatra','Tersedia',15,'df39d8e0a2144bc7c7b111093bac81fa'),('R005','Pulau Kalimantan','Tersedia',7,'d97cbc1e96b14db386d7d205b813a62f');
 /*!40000 ALTER TABLE `tb_ruangan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +131,7 @@ CREATE TABLE `tb_user` (
 
 LOCK TABLES `tb_user` WRITE;
 /*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` VALUES ('nawal','nawwal fadhil ','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Pengguna'),('operator','Operator Resepsionis','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Resepsionis'),('resepsionis','Resepsionis Medquest','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Resepsionis'),('ryan','Ryan','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Admin');
+INSERT INTO `tb_user` VALUES ('123123','123','$2y$10$JKNonUItvDfJy4Ff3tI4be5XLhdQmanAwbsE1xcfSSGvrS.o2tNr6','Resepsionis'),('nawal','nawwal fadhil ','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Pengguna'),('operator','Operator Resepsionis','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Resepsionis'),('resepsionis','Resepsionis Medquest','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Resepsionis'),('ryan','Ryan','$2y$10$Rzn1gkMhhpBjS4n7Tbccruye0TkrigeXFrb74CZL2h58/MHqcUxOa','Admin');
 /*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -144,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-29 10:18:54
+-- Dump completed on 2026-11-03  8:58:36
