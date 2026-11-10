@@ -1,40 +1,46 @@
-<table>
-	<tr>
-		<th>No.</th>
-		<th>ID Ruangan</th>
-		<th>Nama Ruang Meeting</th>
-		<th>Kapasitas</th>
-		<th>Status Ruang</th>
-		<th>Aksi</th>
-	</tr>
- 	
-	<?php $no = 1; foreach ($tb as $baris): ?>
-	<tr>
-		<td align="center"><?php echo $no; ?></td>
-		<td align="center"><?php echo $baris['id_ruangan']; ?></td>
-		<td align="center"><?php echo $baris['nama_ruangan']; ?></td>
-		<td align="center"><?php echo isset($baris['kapasitas']) ? $baris['kapasitas'] . ' orang' : 'Belum diatur'; ?></td>
-		<td align="center"><?php echo $baris['status']; ?></td>
-		<td align="center">
-			<div class="button-edit">
-	            <a href="" data-toggle="modal" data-target="#suntingruangan<?php echo $baris['id_ruangan']; ?>" data-backdrop="static">Sunting</a>
-	        </div>
-	        <div class="button-delete">
-	        	<a href="" data-toggle="modal" data-target="#hapusruangan<?php echo $baris['id_ruangan']; ?>" data-backdrop="static">Hapus</a>
-	        </div>
-		</td>
-	</tr>
-  	<?php $no++; endforeach; ?>
+<table class="cp-table">
+	<thead>
+		<tr>
+			<th style="width:50px; text-align:center;">No.</th>
+			<th style="width:120px;">ID Ruangan</th>
+			<th>Nama Ruang Meeting</th>
+			<th style="width:130px; text-align:center;">Kapasitas</th>
+			<th style="width:140px; text-align:center;">Status</th>
+			<th style="width:210px; text-align:center;">Aksi</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php $no = 1; foreach ($tb as $baris): ?>
+		<tr>
+			<td align="center" style="text-align:center;"><?php echo $no; ?></td>
+			<td><?php echo htmlspecialchars($baris['id_ruangan']); ?></td>
+			<td><strong><?php echo htmlspecialchars($baris['nama_ruangan']); ?></strong></td>
+			<td align="center" style="text-align:center;"><?php echo isset($baris['kapasitas']) ? $baris['kapasitas'] . ' orang' : '-'; ?></td>
+			<td align="center" style="text-align:center;">
+				<span class="badge-status status-disetujui"><?php echo htmlspecialchars($baris['status']); ?></span>
+			</td>
+			<td align="center" style="text-align:center;">
+				<div class="button-edit">
+					<a href="<?php echo base_url('dashboard/qr-ruangan/' . rawurlencode($baris['id_ruangan'])); ?>" target="_blank">Cetak QR</a>
+				</div>
+				<div class="button-edit">
+					<a href="" data-toggle="modal" data-target="#suntingruangan<?php echo $baris['id_ruangan']; ?>" data-backdrop="static">Edit</a>
+				</div>
+				<div class="button-delete">
+					<a href="" data-toggle="modal" data-target="#hapusruangan<?php echo $baris['id_ruangan']; ?>" data-backdrop="static">Hapus</a>
+				</div>
+			</td>
+		</tr>
+		<?php $no++; endforeach; ?>
+	</tbody>
 </table>
 
-
-<!-- Modal Buat Ruangan [Awal] -->
+<!-- Modal Buat Ruangan -->
 <div id="buatruangan" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<!-- Konten Modal [Awal] -->
 		<div class="modal-content">
 			<div class="modal-header">
-				Tambah Ruang Meeting
+				<span>Tambah Ruang Meeting</span>
 				<button type="button" class="close" data-dismiss="modal"><span class="lnr lnr-cross-circle"></span></button>
 			</div>
 
@@ -42,7 +48,7 @@
 				<?php echo form_open('dashboard/buat-ruangan'); ?>
 				<ul>
 					<li>
-						<div><i class="lnr lnr-user"></i></div><input type="text" name="id_ruangan" placeholder="ID ruangan" required />
+						<div><i class="lnr lnr-tag"></i></div><input type="text" name="id_ruangan" placeholder="ID ruangan" required />
 					</li>
 					<li>
 						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama ruang meeting" maxlength="50" required />
@@ -50,103 +56,77 @@
 					<li>
 						<div><i class="lnr lnr-users"></i></div><input type="number" name="kapasitas" placeholder="Kapasitas (orang)" min="1" required />
 					</li>
-					<br /><hr />
+					<hr />
 					<li>
 						<input type="submit" name="tombol_tambah" value="Tambah" />
 					</li>
 				</ul>
 				<?php echo form_close(); ?>
 			</div>
-
-			<div class="modal-footer">
-				<span>Pastikan data telah terisi dengan benar.</span>
-			</div>
 		</div>
-		<!-- Konten Modal [Akhir] -->
 	</div>
 </div>
-<!-- Modal Buat Ruangan [Akhir] -->
 
-
-<!-- Modal Perbarui Data Ruangan [Awal] -->
+<!-- Modal Perbarui Data Ruangan -->
 <?php foreach ($tb as $baris): ?>
 <div id="suntingruangan<?php echo $baris['id_ruangan']; ?>" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<!-- Konten Modal [Awal] -->
 		<div class="modal-content">
 			<div class="modal-header">
-				Sunting Data Ruang Meeting
+				<span>Edit Data Ruang Meeting</span>
 				<button type="button" class="close" data-dismiss="modal"><span class="lnr lnr-cross-circle"></span></button>
 			</div>
 
 			<div class="modal-body">
 				<?php echo form_open('dashboard/perbarui-ruangan'); ?>
 				<ul>
+					<input type="hidden" name="id_ruangan" value="<?php echo $baris['id_ruangan']; ?>">
 					<li>
-						<input type="hidden" name="id_ruangan" value="<?php echo $baris['id_ruangan']; ?>">
+						<div><i class="lnr lnr-tag"></i></div><input type="text" value="<?php echo $baris['id_ruangan']; ?>" disabled />
 					</li>
 					<li>
-						<div><i class="lnr lnr-user"></i></div><input type="text" placeholder="ID ruangan" value="<?php echo $baris['id_ruangan']; ?> (tidak dapat diubah)" disabled />
-					</li>
-					<li>
-						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama ruang meeting" maxlength="50" value="<?php echo $baris['nama_ruangan']; ?>" required />
+						<div><i class="lnr lnr-text-format"></i></div><input type="text" name="nama_ruangan" placeholder="Nama ruang meeting" maxlength="50" value="<?php echo htmlspecialchars($baris['nama_ruangan']); ?>" required />
 					</li>
 					<li>
 						<div><i class="lnr lnr-users"></i></div><input type="number" name="kapasitas" placeholder="Kapasitas (orang)" min="1" value="<?php echo isset($baris['kapasitas']) ? $baris['kapasitas'] : ''; ?>" required />
 					</li>
-					<br /><hr />
+					<hr />
 					<li>
 						<input type="submit" name="tombol_simpan" value="Simpan" />
 					</li>
 				</ul>
 				<?php echo form_close(); ?>
 			</div>
-
-			<div class="modal-footer" >
-				<span>Pastikan data telah terisi dengan benar.</span>
-			</div>
 		</div>
-		<!-- Konten Modal [Akhir] -->
 	</div>
 </div>
 <?php endforeach; ?>
-<!-- Modal Perbarui Data Ruangan [Akhir] -->
 
-
-<!-- Modal Hapus Data Ruangan [Awal] -->
+<!-- Modal Hapus Data Ruangan -->
 <?php foreach ($tb as $baris): ?>
 <div id="hapusruangan<?php echo $baris['id_ruangan']; ?>" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<!-- Konten Modal [Awal] -->
 		<div class="modal-content">
 			<div class="modal-header">
-				Hapus Data Ruangan
+				<span>Hapus Data Ruangan</span>
 				<button type="button" class="close" data-dismiss="modal"><span class="lnr lnr-cross-circle"></span></button>
 			</div>
 
 			<div class="modal-body">
 				<?php echo form_open('dashboard/hapus-ruangan'); ?>
 				<ul>
+					<input type="hidden" name="id_ruangan" value="<?php echo $baris['id_ruangan']; ?>">
 					<li>
-						<input type="hidden" name="id_ruangan" value="<?php echo $baris['id_ruangan']; ?>">
+						<p>Hapus ruangan <span><?php echo htmlspecialchars($baris['nama_ruangan']); ?></span> dari sistem?</p>
 					</li>
-					<li>
-						<p>Apakah Anda yakin ingin menghapus ruangan <span><?php echo $baris['nama_ruangan']; ?></span> dari sistem?</p>
-					</li>
-					<br /><hr />
+					<hr />
 					<li>
 						<input type="submit" name="tombol_hapus" value="Hapus" />
 					</li>
 				</ul>
 				<?php echo form_close(); ?>
 			</div>
-
-			<div class="modal-footer">
-				<span>Pastikan kembali apakah data benar-benar ingin dihapus.</span>
-			</div>
 		</div>
-		<!-- Konten Modal [Akhir] -->
 	</div>
 </div>
 <?php endforeach; ?>
-<!-- Modal Hapus Data Ruangan [Akhir] -->

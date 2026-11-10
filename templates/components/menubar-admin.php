@@ -1,27 +1,60 @@
-﻿<!-- Menubar Admin -->
-<ul>
-	<li <?php if($hal == "Beranda") echo "class='active'"; ?>>
-		<a href="<?php echo base_url('dashboard'); ?>"><!-- <span class="lnr lnr-home"></span> -->Beranda</a>
-	</li>
-	<li <?php if($hal == "Kelola Akun Pengguna") echo "class='active'"; ?>>
-		<a href="<?php echo base_url('dashboard/akun-pengguna'); ?>"><!-- <span class="lnr lnr-user"></span> -->Akun Pengguna</a>
-	</li>
-	<li <?php if($hal == "Kelola Data Ruangan") echo "class='active'"; ?>>
-		<a href="<?php echo base_url('dashboard/data-ruangan'); ?>"><!-- <span class="lnr lnr-database"></span> -->Data Ruang Meeting</a>
-	</li>
-	</li>
-	<li <?php if($hal == "Ketersediaan Ruangan") echo "class='active'"; ?>>
-		<a href="<?php echo base_url('dashboard/ketersediaan-ruangan'); ?>">Ketersediaan Ruangan</a>
-	</li>
-	<li <?php if($hal == "Data Peminjaman" OR $hal == "Laporan Peminjaman") echo "class='active'"; ?>>
-		<a href="<?php echo base_url('dashboard/data-peminjaman'); ?>"><!-- <span class="lnr lnr-layers"></span> -->Data Peminjaman
-			<span id="pending-request-badge" class="badge badge-pill badge-secondary" <?php if(empty($jumlah_menunggu)) echo 'style="display:none"'; ?>><?php echo isset($jumlah_menunggu) ? $jumlah_menunggu : 0; ?></span>
-		</a>
-	</li>
-	<li <?php if($hal == "Riwayat Akses Ruangan") echo "class='active'"; ?>>
-		<a href="<?php echo base_url('dashboard/akses-ruangan'); ?>"><!-- <span class="lnr lnr-history"></span> -->Riwayat Akses Ruang Meeting</a>
-	</li>
-</ul>
+<!-- Menubar Admin -->
+<div class="sidebar-section-title">Menu Utama</div>
+
+<a href="<?php echo base_url('dashboard'); ?>" class="sidebar-link <?php if($hal == 'Beranda') echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="fas fa-home"></i>
+		<span>Dashboard</span>
+	</div>
+</a>
+
+<a href="<?php echo base_url('dashboard/ketersediaan-ruangan'); ?>" class="sidebar-link <?php if($hal == 'Ketersediaan Ruangan') echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="far fa-calendar-alt"></i>
+		<span>Ketersediaan Ruang</span>
+	</div>
+</a>
+
+<a href="<?php echo base_url('dashboard/data-peminjaman'); ?>" class="sidebar-link <?php if($hal == 'Data Peminjaman' || $hal == 'Laporan Peminjaman') echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="fas fa-list-ul"></i>
+		<span>Data Peminjaman</span>
+	</div>
+	<span id="pending-request-badge" style="font-size:11px; background:#dc2626; color:#fff; padding:1px 6px; font-weight:600; <?php if(empty($jumlah_menunggu)) echo 'display:none;'; ?>">
+		<?php echo isset($jumlah_menunggu) ? $jumlah_menunggu : 0; ?>
+	</span>
+</a>
+
+<div class="sidebar-section-title">Master Data</div>
+
+<a href="<?php echo base_url('dashboard/data-ruangan'); ?>" class="sidebar-link <?php if($hal == 'Kelola Data Ruangan' || $hal == 'Daftar Ruang Meeting') echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="fas fa-building"></i>
+		<span>Data Ruangan</span>
+	</div>
+</a>
+
+<a href="<?php echo base_url('dashboard/akun-pengguna'); ?>" class="sidebar-link <?php if($hal == 'Kelola Akun Pengguna') echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="fas fa-users"></i>
+		<span>Akun Pengguna</span>
+	</div>
+</a>
+
+<a href="<?php echo base_url('dashboard/akses-ruangan'); ?>" class="sidebar-link <?php if($hal == 'Riwayat Akses Ruangan') echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="fas fa-history"></i>
+		<span>Riwayat Akses</span>
+	</div>
+</a>
+
+<a href="<?php echo base_url('dashboard/panduan'); ?>" class="sidebar-link <?php if(strpos($hal, 'Panduan') !== false) echo 'active'; ?>">
+	<div class="sidebar-link-inner">
+		<i class="fas fa-book"></i>
+		<span>Panduan</span>
+	</div>
+</a>
+
 <script>
 (function () {
 	var badge = document.getElementById('pending-request-badge');
@@ -32,7 +65,8 @@
 			.then(function (data) {
 				badge.textContent = data.jumlah;
 				badge.style.display = data.jumlah > 0 ? '' : 'none';
-			});
+			})
+			.catch(function () {});
 	}, 30000);
 })();
 </script>

@@ -12,10 +12,14 @@ class Template
     
   	function utama($content, $data = NULL)
   	{
-        if ($this->_ci->session->userdata('level') == 'Admin')
+        if (in_array($this->_ci->session->userdata('level'), array('Admin', 'Resepsionis'), TRUE))
         {
             $this->_ci->load->model('model_peminjaman');
             $data['jumlah_menunggu'] = $this->_ci->model_peminjaman->jumlah_menunggu();
+        }
+        else
+        {
+            $data['jumlah_menunggu'] = 0;
         }
 
         $data['menubar']  = $this->_ci->load->view('components/menubar', $data, TRUE);

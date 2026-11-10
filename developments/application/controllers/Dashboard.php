@@ -87,6 +87,13 @@ class Dashboard extends CI_Controller
 		$checked_in = $this->db->where('waktu_checkin IS NOT NULL')->count_all_results('tb_peminjaman');
 		$halaman['checkin_rate'] = ($total_verified > 0) ? round(($checked_in / $total_verified) * 100) : 100;
 
+		// Jadwal meeting hari ini untuk tabel operasional di Beranda
+		$halaman['jadwal_hari_ini'] = $this->db
+			->where('tanggal_meeting', date('Y-m-d'))
+			->order_by('jam_meeting', 'ASC')
+			->get('tb_peminjaman')
+			->result_array();
+
 		$this->template->utama('pages/halaman-beranda', $halaman);
 	}
 
