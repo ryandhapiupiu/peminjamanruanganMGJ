@@ -1073,7 +1073,13 @@ class Dashboard extends CI_Controller
 			show_404();
 		}
 
-		$room = $this->db->get_where('tb_ruangan', array('room_qr_key' => $room_key))->row_array();
+		$room = $this->db
+			->group_start()
+				->where('id_ruangan', $room_key)
+				->or_where('room_qr_key', $room_key)
+			->group_end()
+			->get('tb_ruangan')
+			->row_array();
 		if (!$room)
 		{
 			show_error('QR Code Ruangan tidak valid!', 400);
@@ -1137,12 +1143,25 @@ class Dashboard extends CI_Controller
 		redirect(base_url('dashboard/data-peminjaman'));
 	}
 
-	public function qr_ruangan($room_key = '')
+	public function qr_ruangan($room_identifier = '')
 	{
-		$room = $this->db->get_where('tb_ruangan', array('room_qr_key' => $room_key))->row_array();
+		$room = $this->db
+			->group_start()
+				->where('id_ruangan', $room_identifier)
+				->or_where('room_qr_key', $room_identifier)
+			->group_end()
+			->get('tb_ruangan')
+			->row_array();
+
 		if (!$room)
 		{
 			show_404();
+		}
+
+		if (empty($room['room_qr_key']))
+		{
+			$room['room_qr_key'] = md5($room['id_ruangan'] . '_' . uniqid());
+			$this->db->where('id_ruangan', $room['id_ruangan'])->update('tb_ruangan', array('room_qr_key' => $room['room_qr_key']));
 		}
 
 		$halaman = array(
